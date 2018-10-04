@@ -52,9 +52,7 @@ button.addEventListener('click', function() {
   }
   
   getData('https://api.github.com/users/' + search + '/repos')
-    .then(function(repositories) {
-      repositories.forEach(function(repository) {
-        addRepositoryToList(repository);
-      });
-    })
+    .then(repositories =>
+      repositories.forEach(repository =>
+        addRepositoryToList(repository)))
 });
