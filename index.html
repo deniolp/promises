@@ -18,6 +18,7 @@
       height: 100px;
       margin: 5px;
       background-color: #23bb8a82;
+      border-radius: 2%;
     }
     
     h2 {
@@ -36,9 +37,21 @@
       margin: 0 auto;
       width: 60px;
     }
+    
+    .nav-bar {
+      background: linear-gradient(-90deg, #84CF6A, #16C0B0);
+      height: 60px;
+      margin-bottom: 15px;
+      padding-top: 10px;
+      padding-left: 10px;
+    }
   </style>
 </head>
 <body>
+  <div class="nav-bar">
+    <input id="input" type="text" name="search" value="" placeholder="Введите логин github">
+    <button id="button" type="button" name="button">Поиск</button>
+  </div>
   <div class="repositories"></div>
   <script type="text/javascript" src="promises.js"></script>
 </body>

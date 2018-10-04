@@ -1,6 +1,8 @@
 'use stricts';
 
 let repositoryList = document.querySelector('.repositories');
+let button = document.querySelector('#button');
+let input = document.querySelector('#input');
 
 function addRepositoryToList(repository) {
   let div = document.createElement('div');
@@ -10,9 +12,10 @@ function addRepositoryToList(repository) {
   div.appendChild(anchor);
   div.className = 'div';
   header.innerText = repository.name;
-  anchor.href = repository.homepage;
-  if (repository.homepage != null) {
+  
+  if (repository.homepage != null && repository.homepage != "") {
     anchor.innerText = 'Ссылка';
+    anchor.href = repository.homepage;
   }
   repositoryList.appendChild(div);
 }
@@ -40,10 +43,16 @@ function getData(url, success) {
   xhr.send();
 }
 
-let search = 'deniolp';
-
-getData('https://api.github.com/users/' + search + '/repos', function(repositories) {
-  repositories.forEach(function(repository) {
-    addRepositoryToList(repository);
+button.addEventListener('click', function() {
+  let search = input.value;
+  
+  while (repositoryList.firstChild) {
+    repositoryList.removeChild(repositoryList.firstChild);
+  }
+  
+  getData('https://api.github.com/users/' + search + '/repos', function(repositories) {
+    repositories.forEach(function(repository) {
+      addRepositoryToList(repository);
+    });
   });
 });
