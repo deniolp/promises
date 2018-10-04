@@ -20,27 +20,28 @@ function addRepositoryToList(repository) {
   repositoryList.appendChild(div);
 }
 
-function getData(url, success) {
-  let xhr = new XMLHttpRequest();
-  
-  xhr.responseType = 'json';
-  
-  xhr.addEventListener('load', function () {
-    if (xhr.status === 200) {
-      let json = xhr.response;
-      console.log(json);
-      success(json);
-    } else {
-      console.error(xhr.statusText);
-    }
+function getData(url) {
+  return new Promise(function(resolve, reject) {
+    let xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    
+    xhr.addEventListener('load', function () {
+      if (xhr.status === 200) {
+        let json = xhr.response;
+        console.log(json);
+        resolve(json);
+      } else {
+        reject(xhr.statusText);
+      }
+    });
+    
+    xhr.addEventListener('error', function (error) {
+      reject(error);
+    });
+    
+    xhr.open('GET', url);
+    xhr.send();
   });
-  
-  xhr.addEventListener('error', function (error) {
-    console.info(error);
-  });
-  
-  xhr.open('GET', url);
-  xhr.send();
 }
 
 button.addEventListener('click', function() {
@@ -50,9 +51,10 @@ button.addEventListener('click', function() {
     repositoryList.removeChild(repositoryList.firstChild);
   }
   
-  getData('https://api.github.com/users/' + search + '/repos', function(repositories) {
-    repositories.forEach(function(repository) {
-      addRepositoryToList(repository);
-    });
-  });
+  getData('https://api.github.com/users/' + search + '/repos')
+    .then(function(repositories) {
+      repositories.forEach(function(repository) {
+        addRepositoryToList(repository);
+      });
+    })
 });
