@@ -3,9 +3,18 @@
 let repositoryList = document.querySelector('.repositories');
 
 function addRepositoryToList(repository) {
-  let p = document.createElement('p');
-  p.innerText = repository.name;
-  repositoryList.appendChild(p);
+  let div = document.createElement('div');
+  let header = document.createElement('h2');
+  let anchor = document.createElement('a');
+  div.appendChild(header);
+  div.appendChild(anchor);
+  div.className = 'div';
+  header.innerText = repository.name;
+  anchor.href = repository.homepage;
+  if (repository.homepage != null) {
+    anchor.innerText = 'Ссылка';
+  }
+  repositoryList.appendChild(div);
 }
 
 function getData(url, success) {
