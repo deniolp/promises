@@ -55,4 +55,5 @@ button.addEventListener('click', function() {
     .then(repositories =>
       repositories.forEach(repository =>
         addRepositoryToList(repository)))
+    .catch(error => console.error(error));
 });
