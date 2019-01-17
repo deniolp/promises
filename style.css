@@ -21,12 +21,20 @@ h2 {
 
 a {
   text-decoration: none;
-  background-color: transparent;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  transition: background-size .3s;
   font-family: 'Montserrat', Arial, sans-serif;
   color: #28749a;
   display: block;
   margin: 0 auto;
   width: 60px;
+}
+
+a:hover {
+  background-size: 100% 2px;
 }
 
 .nav-bar {
