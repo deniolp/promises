@@ -21,7 +21,7 @@ h2 {
 
 a {
   text-decoration: none;
-  background-image: linear-gradient(currentColor, currentColor);
+  background-image: linear-gradient(-90deg, #1447f0de, #ee0bb5);
   background-position: 0% 100%;
   background-repeat: no-repeat;
   background-size: 0% 2px;
